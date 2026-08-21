@@ -42,6 +42,7 @@ to give them 10.
 
 Put a Script inside the first box:
 
+```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
@@ -50,6 +51,7 @@ part.Touched:Connect(function(object)
 		print(player.Name .. " got 10 coins!")
 	end
 end)
+```
 
 There’s one important difference from your original code.
 
@@ -72,6 +74,7 @@ That gives us the actual Player.
 
 Put this in the second box:
 
+```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
@@ -82,16 +85,17 @@ part.Touched:Connect(function(object)
 		end
 	end
 end)
+```
 
 The important part is:
 
-if player.Coins.Value >= 20 then
+`if player.Coins.Value >= 20 then`
 
 Check whether they have enough.
 
 Then:
 
-player.Coins.Value = player.Coins.Value - 20
+`player.Coins.Value = player.Coins.Value - 20`
 
 Take the coins.
 
@@ -101,6 +105,7 @@ Take the coins.
 
 Same thing, just change 20 to 50:
 
+```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
@@ -111,6 +116,7 @@ part.Touched:Connect(function(object)
 		end
 	end
 end)
+```
 
 And that’s already a complete little economy system.
 
