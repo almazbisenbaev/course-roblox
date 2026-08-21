@@ -83,28 +83,9 @@ end)
 
 Future update plans
 
-1. Debounce the boxes — Touched can fire multiple times per jump; add a flag so each box only triggers once per cooldown.
+1. Show the Coins value in a GUI — a ScreenGui/TextLabel bound to `player.Coins.Changed` so the balance is visible on screen.
 
-   ```lua
-   local part = script.Parent
-   local debounce = false
-
-   part.Touched:Connect(function(object)
-       if debounce then return end
-       local player = game.Players:GetPlayerFromCharacter(object.Parent)
-       if player then
-           debounce = true
-           player.Coins.Value = player.Coins.Value + 10
-           print(player.Name .. " got 10 coins! Coins: " .. player.Coins.Value)
-           task.wait(1)
-           debounce = false
-       end
-   end)
-   ```
-
-2. Show the Coins value in a GUI — a ScreenGui/TextLabel bound to `player.Coins.Changed` so the balance is visible on screen.
-
-3. Other gradual enhancements
+2. Other gradual enhancements
 
    - Save Coins between sessions with DataStoreService.
    - Replace magic numbers with variables (e.g. `local reward = 10`).
