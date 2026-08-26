@@ -83,12 +83,8 @@ end)
 
 Future update plans
 
-1. Show the Coins value in a GUI — a ScreenGui/TextLabel bound to `player.Coins.Changed` so the balance is visible on screen.
-
-2. Other gradual enhancements
-
-   - Save Coins between sessions with DataStoreService.
-   - Replace magic numbers with variables (e.g. `local reward = 10`).
-   - Add a visual/sound effect on earning or spending coins.
-   - Make a box a one-time purchase (attribute or disabled state).
-   - Move the shared Touched-handling logic into a ModuleScript once there are more boxes.
+- Save Coins between sessions with DataStoreService.
+- Replace magic numbers with variables (e.g. `local reward = 10`).
+- Add a visual/sound effect on earning or spending coins.
+- Make a box a one-time purchase (attribute or disabled state).
+- Move the shared Touched-handling logic into a ModuleScript once there are more boxes.
