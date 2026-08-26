@@ -85,11 +85,7 @@ The `..` joins text together: `"Coins: " .. 30` becomes `"Coins: 30"`.
 
 ## Future update plans
 
-1. Save Coins between sessions with `DataStoreService`, so the number isn't lost on leave.
-
-2. Other gradual enhancements
-
-   - Make the label flash green when coins go up, red when they go down.
-   - Add a coin icon (`ImageLabel`) next to the number.
-   - Show a short "Not enough coins!" message when a purchase fails.
-   - Use `UIListLayout` once there is more than one thing to display.
+- Make the label flash green when coins go up, red when they go down.
+- Add a coin icon (`ImageLabel`) next to the number.
+- Show a short "Not enough coins!" message when a purchase fails.
+- Use `UIListLayout` once there is more than one thing to display.

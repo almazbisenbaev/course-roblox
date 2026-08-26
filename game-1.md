@@ -83,7 +83,6 @@ end)
 
 Future update plans
 
-- Save Coins between sessions with DataStoreService.
 - Replace magic numbers with variables (e.g. `local reward = 10`).
 - Add a visual/sound effect on earning or spending coins.
 - Make a box a one-time purchase (attribute or disabled state).
