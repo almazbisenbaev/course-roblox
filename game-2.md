@@ -4,25 +4,24 @@ Script inside the first box:
 
 ```lua
 local part = script.Parent
-
--- NEW
 local debounce = false
 
 part.Touched:Connect(function(object)
-	-- NEW
+
+	-- если игрок уже получал коины
 	if debounce then return end
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
-		-- NEW
+		-- указываем что юзер уже получил коины, чтобы не давать их еще раз
 		debounce = true
 
 		player.Coins.Value = player.Coins.Value + 10
 		print(player.Name .. " got 10 coins! Coins: " .. player.Coins.Value)
 
-		-- NEW
+		-- ждем 1 секунду прежде чем дать еще коины
 		task.wait(1)
-		-- NEW
+		-- убираем дебаунс, чтобы игрок мог получить еще коины
 		debounce = false
 	end
 end)
