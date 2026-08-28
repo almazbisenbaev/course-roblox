@@ -36,16 +36,15 @@ Script inside the second box:
 ```lua
 local part = script.Parent
 
--- NEW
+-- проверяем что игрок уже только что купил эту вещь
 local debounce = false
 
 part.Touched:Connect(function(object)
-	-- NEW
 	if debounce then return end
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
-		-- NEW
+		-- указываем что игрок уже только что купил эту вещь, чтобы не купил сразу еще раз
 		debounce = true
 
 		if player.Coins.Value >= 20 then
@@ -55,9 +54,9 @@ part.Touched:Connect(function(object)
 			print(player.Name .. " doesn't have enough coins (needs 20). Coins: " .. player.Coins.Value)
 		end
 
-		-- NEW
+		-- ждем секунду чтобы обновить счетчик
 		task.wait(1)
-		-- NEW
+		-- обновляем счетчик, теперь можно покупать еще раз
 		debounce = false
 	end
 end)
@@ -71,17 +70,15 @@ Same as the 20-coin box, with the amount changed to 50:
 
 ```lua
 local part = script.Parent
-
--- NEW
 local debounce = false
 
 part.Touched:Connect(function(object)
-	-- NEW
+
 	if debounce then return end
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
-		-- NEW
+
 		debounce = true
 
 		if player.Coins.Value >= 50 then
@@ -91,9 +88,7 @@ part.Touched:Connect(function(object)
 			print(player.Name .. " doesn't have enough coins (needs 50). Coins: " .. player.Coins.Value)
 		end
 
-		-- NEW
 		task.wait(1)
-		-- NEW
 		debounce = false
 	end
 end)

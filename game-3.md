@@ -35,12 +35,24 @@ It's just a picture though, the number never changes yet.
 
 Add a **LocalScript** inside the `ScreenGui` (hover `ScreenGui` → **+** → **LocalScript**).
 
+> ⚠️ Hover over **`ScreenGui`**, not over `CoinsLabel`. The script and the label
+> are neighbours — the script goes *next to* the label, not *inside* it:
+>
+> ```
+> ScreenGui
+> ├── CoinsLabel   (TextLabel)
+> └── LocalScript
+> ```
+>
+> If you clicked the wrong **+**, just drag the LocalScript onto `ScreenGui` in
+> the Explorer.
+
 > ⚠️ It must be a **LocalScript**, not a Script. GUI belongs to one player,
 > so it runs on that player's computer.
 
 ```lua
 local player = game.Players.LocalPlayer
-local label = script.Parent.CoinsLabel
+local label = script.Parent:WaitForChild("CoinsLabel")
 
 -- Ждем пока сервер создаст коины
 local coins = player:WaitForChild("Coins")
@@ -64,7 +76,7 @@ on screen goes up.
 | Line | What it does |
 | --- | --- |
 | `game.Players.LocalPlayer` | "the player sitting at this computer" — only works in a LocalScript |
-| `script.Parent.CoinsLabel` | the script is inside the ScreenGui, so its parent is the ScreenGui, and the label is inside it |
+| `script.Parent:WaitForChild("CoinsLabel")` | the script is inside the ScreenGui, so its parent is the ScreenGui, and the label is next to it |
 | `player:WaitForChild("Coins")` | the ServerScriptService script creates `Coins` a moment after joining — this waits for it instead of erroring |
 | `label.Text = "Coins: " .. coins.Value` | sets the text once, at the start |
 | `coins.Changed:Connect(...)` | runs the function **every time** the number changes; `newValue` is the new amount |
@@ -78,6 +90,10 @@ The `..` joins text together: `"Coins: " .. 30` becomes `"Coins: 30"`.
 - **Nothing shows up** → the script is a `Script` instead of a `LocalScript`.
 - **`CoinsLabel is not a valid member of ScreenGui`** → the TextLabel is named
   something else (like `TextLabel`), or it's not inside the ScreenGui.
+- **`CoinsLabel is not a valid member of TextLabel "...ScreenGui.CoinsLabel"`** →
+  read the end of that path: it says the script's parent is `CoinsLabel`. The
+  LocalScript got dropped *inside* the label. Drag it onto `ScreenGui` so the two
+  sit side by side.
 - **The label never updates** → you wrote `coins.Value.Changed` instead of
   `coins.Changed`.
 
