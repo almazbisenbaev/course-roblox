@@ -105,7 +105,7 @@ When you press **Stop** in Studio, the server can shut down before
 `PlayerRemoving` finishes saving. Add this at the very bottom of the script:
 
 ```lua
--- 🆕 NEW — save everyone if the server shuts down
+-- save everyone if the server shuts down
 game:BindToClose(function()
 	for _, player in ipairs(game.Players:GetPlayers()) do
 		pcall(function()

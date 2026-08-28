@@ -42,13 +42,13 @@ Add a **LocalScript** inside the `ScreenGui` (hover `ScreenGui` → **+** → **
 local player = game.Players.LocalPlayer
 local label = script.Parent.CoinsLabel
 
--- wait until the server has created the Coins value for this player
+-- Ждем пока сервер создаст коины
 local coins = player:WaitForChild("Coins")
 
--- show the amount right away
+-- Показываем текущее значение (пока выйдет 0)
 label.Text = "Coins: " .. coins.Value
 
--- and show it again every time it changes
+-- Обновляем текст каждый раз когда у игрока меняются коины
 coins.Changed:Connect(function(newValue)
 	label.Text = "Coins: " .. newValue
 end)
