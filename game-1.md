@@ -11,9 +11,12 @@ Script inside ServerScriptService:
 
 ```lua
 game.Players.PlayerAdded:Connect(function(player)
+	-- когда игрок заходит в игру, делаем ему счетчик коинов
 	local coins = Instance.new("IntValue")
 	coins.Name = "Coins"
+	-- в начале коинов ноль
 	coins.Value = 0
+	-- кладем счетчик внутрь игрока
 	coins.Parent = player
 
 	print(player.Name .. " joined. Coins: " .. coins.Value)
@@ -29,8 +32,11 @@ Script inside the first box:
 ```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
+	-- узнаем какой игрок наступил на коробку
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
+	-- если на коробку наступил игрок, а не что-то другое
 	if player then
+		-- даем игроку 10 коинов
 		player.Coins.Value = player.Coins.Value + 10
 		print(player.Name .. " got 10 coins! Coins: " .. player.Coins.Value)
 	end
@@ -46,12 +52,16 @@ Script inside the second box:
 ```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
+	-- узнаем какой игрок наступил на коробку
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
+		-- проверяем что у игрока хватает коинов
 		if player.Coins.Value >= 20 then
+			-- забираем 20 коинов
 			player.Coins.Value = player.Coins.Value - 20
 			print(player.Name .. " bought the box! Coins: " .. player.Coins.Value)
 		else
+			-- коинов не хватает, ничего не покупаем
 			print(player.Name .. " doesn't have enough coins (needs 20). Coins: " .. player.Coins.Value)
 		end
 	end
@@ -67,12 +77,16 @@ Same as the 20-coin box, with the amount changed to 50:
 ```lua
 local part = script.Parent
 part.Touched:Connect(function(object)
+	-- узнаем какой игрок наступил на коробку
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
+		-- проверяем что у игрока хватает коинов
 		if player.Coins.Value >= 50 then
+			-- забираем 50 коинов
 			player.Coins.Value = player.Coins.Value - 50
 			print(player.Name .. " bought the box! Coins: " .. player.Coins.Value)
 		else
+			-- коинов не хватает, ничего не покупаем
 			print(player.Name .. " doesn't have enough coins (needs 50). Coins: " .. player.Coins.Value)
 		end
 	end

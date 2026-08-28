@@ -8,12 +8,12 @@ local debounce = false
 
 part.Touched:Connect(function(object)
 
-	-- если игрок уже получал коины
+	-- если игрок только что получал коины, ничего не делаем
 	if debounce then return end
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
-		-- указываем что юзер уже получил коины, чтобы не давать их еще раз
+		-- запоминаем что игрок только что получил коины, чтобы не дать их еще раз
 		debounce = true
 
 		player.Coins.Value = player.Coins.Value + 10
@@ -36,7 +36,7 @@ Script inside the second box:
 ```lua
 local part = script.Parent
 
--- проверяем что игрок уже только что купил эту вещь
+-- здесь запоминаем, купил ли игрок эту вещь только что
 local debounce = false
 
 part.Touched:Connect(function(object)
@@ -44,7 +44,7 @@ part.Touched:Connect(function(object)
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
-		-- указываем что игрок уже только что купил эту вещь, чтобы не купил сразу еще раз
+		-- запоминаем что игрок только что купил эту вещь, чтобы не купил сразу еще раз
 		debounce = true
 
 		if player.Coins.Value >= 20 then
@@ -54,9 +54,9 @@ part.Touched:Connect(function(object)
 			print(player.Name .. " doesn't have enough coins (needs 20). Coins: " .. player.Coins.Value)
 		end
 
-		-- ждем секунду чтобы обновить счетчик
+		-- ждем 1 секунду прежде чем можно купить еще раз
 		task.wait(1)
-		-- обновляем счетчик, теперь можно покупать еще раз
+		-- убираем дебаунс, теперь игрок может покупать еще раз
 		debounce = false
 	end
 end)
@@ -70,25 +70,33 @@ Same as the 20-coin box, with the amount changed to 50:
 
 ```lua
 local part = script.Parent
+
+-- здесь запоминаем, купил ли игрок эту вещь только что
 local debounce = false
 
 part.Touched:Connect(function(object)
 
+	-- если игрок только что покупал, ничего не делаем
 	if debounce then return end
 
 	local player = game.Players:GetPlayerFromCharacter(object.Parent)
 	if player then
 
+		-- запоминаем что игрок только что купил эту вещь, чтобы не купил сразу еще раз
 		debounce = true
 
+		-- проверяем что у игрока хватает коинов
 		if player.Coins.Value >= 50 then
 			player.Coins.Value = player.Coins.Value - 50
 			print(player.Name .. " bought the box! Coins: " .. player.Coins.Value)
 		else
+			-- коинов не хватает, ничего не покупаем
 			print(player.Name .. " doesn't have enough coins (needs 50). Coins: " .. player.Coins.Value)
 		end
 
+		-- ждем 1 секунду прежде чем можно купить еще раз
 		task.wait(1)
+		-- убираем дебаунс, теперь игрок может покупать еще раз
 		debounce = false
 	end
 end)

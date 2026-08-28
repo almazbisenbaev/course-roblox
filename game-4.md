@@ -26,12 +26,12 @@ DataStore to exist at all.
 
 ## 2. The full script
 
-Script inside `ServerScriptService` — every new line is marked with `-- 🆕 NEW`:
+Script inside `ServerScriptService` — every new line is marked with `-- 🆕 НОВОЕ`:
 
 ```lua
--- 🆕 NEW
+-- 🆕 НОВОЕ — просим у Roblox систему сохранений
 local DataStoreService = game:GetService("DataStoreService")
--- 🆕 NEW
+-- 🆕 НОВОЕ — открываем свою коробку, где будут лежать коины
 local coinsStore = DataStoreService:GetDataStore("PlayerCoins")
 
 game.Players.PlayerAdded:Connect(function(player)
@@ -40,12 +40,12 @@ game.Players.PlayerAdded:Connect(function(player)
 	coins.Value = 0
 	coins.Parent = player
 
-	-- 🆕 NEW — try to load the saved amount
+	-- 🆕 НОВОЕ — пробуем прочитать сколько коинов было сохранено
 	local ok, savedValue = pcall(function()
 		return coinsStore:GetAsync("Player_" .. player.UserId)
 	end)
 
-	-- 🆕 NEW — if it loaded, use it
+	-- 🆕 НОВОЕ — если прочиталось, ставим игроку это число
 	if ok and savedValue then
 		coins.Value = savedValue
 	end
@@ -53,7 +53,7 @@ game.Players.PlayerAdded:Connect(function(player)
 	print(player.Name .. " joined. Coins: " .. coins.Value)
 end)
 
--- 🆕 NEW — save when the player leaves
+-- 🆕 НОВОЕ — сохраняем коины когда игрок выходит из игры
 game.Players.PlayerRemoving:Connect(function(player)
 	pcall(function()
 		coinsStore:SetAsync("Player_" .. player.UserId, player.Coins.Value)
@@ -105,7 +105,7 @@ When you press **Stop** in Studio, the server can shut down before
 `PlayerRemoving` finishes saving. Add this at the very bottom of the script:
 
 ```lua
--- save everyone if the server shuts down
+-- сохраняем коины всем игрокам, если сервер выключается
 game:BindToClose(function()
 	for _, player in ipairs(game.Players:GetPlayers()) do
 		pcall(function()
