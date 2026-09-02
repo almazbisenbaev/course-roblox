@@ -1,6 +1,5 @@
 Green box → jump on it → +10 Coins
 Blue box → jump on it → costs 20 Coins
-Red box → jump on it → costs 50 Coins
 
 
 
@@ -63,31 +62,6 @@ part.Touched:Connect(function(object)
 		else
 			-- коинов не хватает, ничего не покупаем
 			print(player.Name .. " doesn't have enough coins (needs 20). Coins: " .. player.Coins.Value)
-		end
-	end
-end)
-```
-
-⸻
-
-4. The 50-coin box
-
-Same as the 20-coin box, with the amount changed to 50:
-
-```lua
-local part = script.Parent
-part.Touched:Connect(function(object)
-	-- узнаем какой игрок наступил на коробку
-	local player = game.Players:GetPlayerFromCharacter(object.Parent)
-	if player then
-		-- проверяем что у игрока хватает коинов
-		if player.Coins.Value >= 50 then
-			-- забираем 50 коинов
-			player.Coins.Value = player.Coins.Value - 50
-			print(player.Name .. " bought the box! Coins: " .. player.Coins.Value)
-		else
-			-- коинов не хватает, ничего не покупаем
-			print(player.Name .. " doesn't have enough coins (needs 50). Coins: " .. player.Coins.Value)
 		end
 	end
 end)
